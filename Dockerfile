@@ -1,6 +1,6 @@
-FROM alpine:3.20
+FROM alpine:3.23
 
-ARG XRAY_VERSION=25.11.21
+ARG XRAY_VERSION=26.4.17
 
 RUN apk add --no-cache \
       ca-certificates \
