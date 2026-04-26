@@ -1,8 +1,6 @@
 FROM alpine:3.23
 
 ARG XRAY_VERSION=26.4.17
-ENV PORT=10000 \
-    XRAY_PORT=10001
 
 RUN apk add --no-cache \
       ca-certificates \
@@ -35,9 +33,9 @@ COPY entrypoint.sh /entrypoint.sh
 
 RUN chmod +x /entrypoint.sh
 
-EXPOSE 10000/tcp
+EXPOSE 80/tcp
 
 HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \
-  CMD wget -qO- "http://127.0.0.1:${PORT}/" >/dev/null 2>&1 || exit 1
+  CMD wget -qO- http://127.0.0.1/ >/dev/null 2>&1 || exit 1
 
 ENTRYPOINT ["/entrypoint.sh"]
