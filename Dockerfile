@@ -1,4 +1,4 @@
-FROM alpine:3.23
+FROM alpine:3.20
 
 ARG XRAY_VERSION=26.4.17
 
