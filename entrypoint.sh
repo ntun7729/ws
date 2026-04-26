@@ -16,13 +16,13 @@ envsubst '${WS_PATH}' < /etc/nginx/templates/nginx.conf.template > /etc/nginx/ng
 envsubst '${VLESS_UUID} ${WS_PATH}' < /etc/xray/xray.json.template > /etc/xray/config.json
 
 echo "Validating Xray configuration"
-/usr/local/bin/xray run -test -c /etc/xray/config.json >/dev/null 2>&1
+/usr/local/bin/xray run -test -c /etc/xray/config.json
 
 echo "Validating Nginx configuration"
 nginx -t
 
 echo "Starting Xray"
-su-exec xray:xray /usr/local/bin/xray run -c /etc/xray/config.json >/dev/null 2>&1 &
+su-exec xray:xray /usr/local/bin/xray run -c /etc/xray/config.json &
 XRAY_PID="$!"
 
 echo "Starting Nginx"
