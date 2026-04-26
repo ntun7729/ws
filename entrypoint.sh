@@ -3,15 +3,20 @@ set -eu
 
 : "${VLESS_UUID:?VLESS_UUID is required}"
 : "${WS_PATH:=/r9q2x7b6p4w8}"
+: "${PORT:=80}"
 
 case "$WS_PATH" in
   /*) ;;
   *) WS_PATH="/$WS_PATH" ;;
 esac
 
-export VLESS_UUID WS_PATH
+case "$PORT" in
+  ''|*[!0-9]*) echo "PORT must be a number" >&2; exit 1 ;;
+esac
 
-envsubst '${WS_PATH}' < /etc/nginx/templates/nginx.conf.template > /etc/nginx/nginx.conf
+export VLESS_UUID WS_PATH PORT
+
+envsubst '${PORT} ${WS_PATH}' < /etc/nginx/templates/nginx.conf.template > /etc/nginx/nginx.conf
 envsubst '${VLESS_UUID} ${WS_PATH}' < /etc/xray/xray.json.template > /etc/xray/config.json
 
 /usr/local/bin/xray run -test -c /etc/xray/config.json >/dev/null 2>&1
