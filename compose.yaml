@@ -1,0 +1,11 @@
+services:
+  xray-nginx-ws:
+    image: ghcr.io/ntun7729/ws:latest
+    build:
+      context: .
+    container_name: xray-nginx-ws
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    env_file:
+      - .env
