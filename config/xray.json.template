@@ -1,8 +1,8 @@
 {
   "log": {
-    "loglevel": "none",
+    "loglevel": "warning",
     "access": "none",
-    "error": "none"
+    "error": "/dev/stderr"
   },
   "inbounds": [
     {
@@ -13,8 +13,7 @@
       "settings": {
         "clients": [
           {
-            "id": "${VLESS_UUID}",
-            "flow": ""
+            "id": "${VLESS_UUID}"
           }
         ],
         "decryption": "none"
