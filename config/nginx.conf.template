@@ -23,8 +23,8 @@ http {
   }
 
   server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
+    listen ${PORT} default_server;
+    listen [::]:${PORT} default_server;
 
     root /usr/share/nginx/html;
     index index.html;
